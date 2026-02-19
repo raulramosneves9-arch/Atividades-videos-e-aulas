@@ -5,8 +5,8 @@
 
 
 body {
-    background-image: linear-gradient(rgb(59, 88, 93),
-            rgb(29, 40, 42));
+    background-image: linear-gradient( rgb(176, 94, 54),
+    rgb(74, 46, 31));
 
     height: 100vh;
     color: white;
@@ -77,10 +77,11 @@ body {
 }
 
 #current-progress {
+    --progress: 0%;
     height: inherit;
     background-color: white;
-    width: 50%;
-    border-radius: 15px;
+    width: var(--progress);
+    border-radius: inherit;
 }
 
 button {
