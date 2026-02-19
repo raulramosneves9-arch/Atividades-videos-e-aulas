@@ -93,6 +93,7 @@ button {
 
 #progress-container {
     padding-bottom: 1em;
+    cursor: pointer;
 
 }
 
