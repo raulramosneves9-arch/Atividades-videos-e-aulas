@@ -32,8 +32,8 @@ const Tempo_Perdido = {
 };
 let isShuffle = false;
 let isPlaying = false;
-const playlist = [Construção, Tempo_Perdido, Evidências]
-let sortedPlaylist = [...playlist]
+const originalPlaylist = [Construção, Tempo_Perdido, Evidências]
+let sortedPlaylist = [...originalPlaylist]
 let index = 0;
 
 function playSong() {
@@ -132,7 +132,9 @@ function shuffleButtonClicked() {
         shuffleButton.classList.add('button-active')
     }
     else {
-
+        isShuffle = false;
+        sortedPlaylist = [...originalPlaylist];
+        shuffleButton.classList.remove('button-active')
     }
 }
 

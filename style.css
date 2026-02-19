@@ -96,6 +96,6 @@ button {
 
 }
 
-.button.active {
+.button-active {
     color: lightgreen;
 }
