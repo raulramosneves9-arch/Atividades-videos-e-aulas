@@ -69,11 +69,11 @@ body {
 }
 
 #progress-bar {
+    
     background-color: rgb(139, 153, 156);
     height: 3px;
     width: 100%;
     border-radius: 15px;
-    margin-bottom: 1em;
 }
 
 #current-progress {
@@ -89,4 +89,13 @@ button {
     border: none;
     cursor: pointer;
     color:inherit
+}
+
+#progress-container {
+    padding-bottom: 1em;
+
+}
+
+.button.active {
+    color: lightgreen;
 }
