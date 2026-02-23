@@ -84,7 +84,7 @@ function initializeSong() {
     song.src = `songs/${sortedPlaylist[index].file}.mp3`;
     songName.innerText = sortedPlaylist[index].songName;
     bandName.innerText = sortedPlaylist[index].artist;
-     likeButtonRender();
+   
 }
 
 function priviousSong() {
