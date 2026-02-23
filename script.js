@@ -30,17 +30,18 @@ const Evidências = {
 
 const Tempo_Perdido = {
     songName: 'Tempo Perdido',
-    artist: 'Lergião Urbana',
+    artist: 'Legião Urbana',
     file: 'Tempo_Perdido',
     liked: false,
 };
 
 let isShuffle = false;
 let isPlaying = false;
+let repeatOn = false;
 const originalPlaylist = [Construção, Tempo_Perdido, Evidências]
 let sortedPlaylist = [...originalPlaylist]
 let index = 0;
-song.loop = false;
+
 
 function playSong() {
     play.querySelector('.bi').classList.remove('bi-play-circle-fill');
@@ -83,10 +84,10 @@ function initializeSong() {
     song.src = `songs/${sortedPlaylist[index].file}.mp3`;
     songName.innerText = sortedPlaylist[index].songName;
     bandName.innerText = sortedPlaylist[index].artist;
-    likeButtonRender();
+     likeButtonRender();
 }
 
-function privioussong() {
+function priviousSong() {
     index--;
     if (index < 0) {
         index = sortedPlaylist.length - 1;
@@ -97,7 +98,6 @@ function privioussong() {
 
 function previousSong() {
     if (isShuffle) {
-        // go to a random song when shuffling
         let newIndex;
         do {
             newIndex = Math.floor(Math.random() * sortedPlaylist.length);
@@ -149,61 +149,44 @@ function jumpTo(event) {
     song.currentTime = jumpToTime;
 }
 
-function shuffleArray(preshuffledArray) {
-    let currentIndex = preshuffledArray.length - 1;
+function shuffleArray(preShuffleArray) {
+    const size = preShuffleArray.length;
+    let currentIndex = size = -1;
     while (currentIndex > 0) {
-        // pick a random index from 0 to currentIndex inclusive
-        let randomIndex = Math.floor(Math.random() * (currentIndex + 1));
-        let aux = preshuffledArray[currentIndex];
-        preshuffledArray[currentIndex] = preshuffledArray[randomIndex];
-        preshuffledArray[randomIndex] = aux;
+        let randomIndex = Math.floor(Math.random() * size);
+        let aux = preShuffleArray[currentIndex];
+        preShuffleArray[currentIndex] = preShuffleArray[randomIndex];
+        preShuffleArray[randomIndex] = aux;
         currentIndex -= 1;
     }
 }
 
 function shuffleButtonClicked() {
-    if (!isShuffle) {
+    if (isShuffle === false) {
         isShuffle = true;
         shuffleArray(sortedPlaylist);
-        // start from first song of shuffled list
-        index = 0;
-        initializeSong();
         shuffleButton.classList.add('button-active');
-    } else {
-        isShuffle = false;
-        sortedPlaylist = [...originalPlaylist];
-        // restore current song to same track in original order
-        // find by file name to keep playback consistent
-        const currentFile = song.src.split('/').pop().replace('.mp3', '');
-        const originalIndex = originalPlaylist.findIndex(
-            item => item.file === currentFile
-        );
-        index = originalIndex >= 0 ? originalIndex : 0;
-        initializeSong();
-        shuffleButton.classList.remove('button-active');
+        
     }
 }
 
 function repeatButtonClicked() {
-    if (song.loop === false) {
-        song.loop = true;
+    if (repeatOn === false) {
+        repeatOn = true;
         repeatButton.classList.add('button-active');
     } else {
-        song.loop = false;
+        repeatOn = false;
         repeatButton.classList.remove('button-active');
     }
 }
 
 
-
-
 function nextOrRepeat () {
-    // when the audio ends we either advance to the next track or
-    // restart the current one depending on loop state
-    if (song.loop === false) {
+
+    if (repeatOn === false) {
         nextSong();
-    } else {
-        // just replay same song
+    } 
+    else {
         playSong();
     }
 }
@@ -250,6 +233,6 @@ song.addEventListener('timeupdate', updateProgress);
 song.addEventListener('loadedmetadata', updateTotalTime);
 song.addEventListener('ended', nextOrRepeat);
 progressContainer.addEventListener('click', jumpTo);
-shuffleButton.addEventListener('click', shuffleButtonClicked)
-repeatButton.addEventListener('click', repeatButtonClicked)
-likeButton.addEventListener('click', likeButtonClicked)
+shuffleButton.addEventListener('click', shuffleButtonClicked);
+repeatButton.addEventListener('click', repeatButtonClicked);
+likeButton.addEventListener('click', likeButtonClicked);
