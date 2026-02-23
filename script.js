@@ -5,13 +5,14 @@ const cover = document.getElementById('cover')
 const play = document.getElementById('play');
 const next = document.getElementById('next');
 const previous = document.getElementById('previous');
+const likeButton = document.getElementById ('like');
 const currentProgress = document.getElementById('current-progress')
 const progressContainer = document.getElementById('progress-container')
 const shuffleButton = document.getElementById('shuffle')
 const repeatButton = document.getElementById('repeat')
 const songTime = document.getElementById ('song-time')
 const totalTime = document.getElementById ('total-time')
-const likeButton = document.getElementById ('like')
+
 
 const Construção = {
     songName: 'Construção',
@@ -194,7 +195,7 @@ function repeatButtonClicked() {
 }
 
 
-}
+
 
 function nextOrRepeat () {
     // when the audio ends we either advance to the next track or
@@ -231,10 +232,11 @@ function updateTotalTime () {
 }
 
 function likeButtonClicked () {
-    if (sortedPlaylist[index].Liked === false) {
-        sortedPlaylist[index].Liked = true;
+    if  (sortedPlaylist[index].liked === false) {
+        sortedPlaylist[index].liked = true;
     }
-    else {        sortedPlaylist[index].Liked = false;
+    else { 
+        sortedPlaylist[index].liked = false;
     }
     likeButtonRender();
 }
