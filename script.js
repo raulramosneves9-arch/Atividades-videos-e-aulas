@@ -38,8 +38,8 @@ const Tempo_Perdido = {
 let isShuffle = false;
 let isPlaying = false;
 let repeatOn = false;
-const originalPlaylist = [Construção, Tempo_Perdido, Evidências]
-let sortedPlaylist = [...originalPlaylist]
+const originalPlaylist = JSON.parse(localStorage.setItem('playlist')) ?? [Construção, Evidências, Tempo_Perdido];
+let sortedPlaylist = [...originalPlaylist];
 let index = 0;
 
 
@@ -222,6 +222,10 @@ function likeButtonClicked () {
         sortedPlaylist[index].liked = false;
     }
     likeButtonRender();
+    localStorage.setItem(
+        'playlist',
+        JSON.stringify(originalPlaylist)
+    );
 }
 
 initializeSong();
